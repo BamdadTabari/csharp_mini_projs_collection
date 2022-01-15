@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
-
+    
 namespace SimpleTelBot
 {
     class Program
@@ -15,15 +15,21 @@ namespace SimpleTelBot
             Bot = new TelegramBotClient("5041987467:AAEF6Jr5z8i9dkbfs6x-qhhs72raHftnFfE");
             User me = await Bot.GetMeAsync();
             Console.Title = me.Username ?? "My awesome Bot";
+            Handlers handlers = new();
 
             using var cts = new CancellationTokenSource();
 
             // StartReceiving does not block the caller thread. Receiving is done on the ThreadPool.
-            //ReceiverOptions receiverOptions = new() { AllowedUpdates = { } };
-            //Bot.StartReceiving(Handlers.HandleUpdateAsync,
-            //                   Handlers.HandleErrorAsync,
-            //                   receiverOptions,
-            //                   cts.Token);
+            var receiverOptions = new ReceiverOptions
+            {
+                AllowedUpdates = { } // receive all update types
+            };
+            Bot.StartReceiving(
+                handlers.HandleUpdateAsync,
+                handlers.HandleErrorAsync,
+                receiverOptions,
+                cancellationToken: cts.Token);
+
 
             Console.WriteLine($"Start listening for @{me.Username}");
             Console.ReadLine();
