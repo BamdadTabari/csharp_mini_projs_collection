@@ -34,7 +34,7 @@ namespace SimpleTelBot
             Message message = await botClient.SendTextMessageAsync(
                 chatId: chatId,
                 text: "Trying *all the parameters* of `sendMessage` method",
-                parseMode: ParseMode.MarkdownV2,
+                parseMode: ParseMode.Markdown,
                 disableNotification: true,
                 replyToMessageId: update.Message.MessageId,
                 replyMarkup: new InlineKeyboardMarkup(
