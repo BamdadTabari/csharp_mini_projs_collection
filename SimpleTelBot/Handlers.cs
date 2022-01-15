@@ -15,7 +15,6 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace SimpleTelBot
 {
-
     public class Handlers
     {
       
